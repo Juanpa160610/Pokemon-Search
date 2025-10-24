@@ -1,0 +1,56 @@
+<body>
+
+
+<!-- Contenedor principal -->
+<div class="container">
+  <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
+
+  <h1>PokéSearch</h1>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Buscar Pokémon..."
+    />
+    <button (click)="buscarPokemon()">🔍 Buscar</button>
+  </div>
+
+  <!-- Tarjeta del Pokémon -->
+  <div *ngIf="pokemon" class="pokemon-card">
+    <div class="card-header">
+      <h2>{{ pokemon.name | titlecase }} #{{ pokemon.id }}</h2>
+    </div>
+    <div class="card-body">
+      <div class="pokemon-image">
+        <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+      </div>
+      <div class="pokemon-info">
+        <p><strong>Altura:</strong> {{ pokemon.height }}</p>
+        <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+
+        <h3>Habilidades:</h3>
+        <div class="abilities">
+          <span *ngFor="let ability of pokemon.abilities" class="chip">
+            {{ ability.ability.name }}
+          </span>
+        </div>
+
+        <h3>Tipos:</h3>
+        <div class="types">
+          <span *ngFor="let type of pokemon.types" class="chip type-{{ type.type.name }}">
+            {{ type.type.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Error -->
+  <p *ngIf="error" class="error">{{ error }}</p>
+</div>
+
+<footer>Hecho Por Juan Pablo</footer>
+
+</body>

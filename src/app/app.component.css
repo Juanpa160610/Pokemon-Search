@@ -1,0 +1,284 @@
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/*  Fondo Animado 'Cielo de Batalla Épico' */
+body {
+  margin: 0; /* ¡MUY IMPORTANTE! Elimina el margen predeterminado del navegador */
+  padding: 0;
+  min-height: 100vh; /* ¡MUY IMPORTANTE! Asegura que el cuerpo ocupa el 100% de la altura visible */
+  overflow-x: hidden;
+  font-family: 'Press Start 2P', cursive;
+  
+  /* Colores primarios Pokémon: Rojo intenso, Amarillo brillante, Azul cielo, Verde hierba */
+  background: linear-gradient(135deg, #FF6B6B, #FFD700, #4DA6FF, #55D66B);
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease-in-out infinite alternate;
+  color: #fff; 
+}
+
+/* Movimiento suave del degradado */
+@keyframes gradientShift {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/*  Partículas Brillantes / Estrellas */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* Efecto de estrellas/chispas de energía */
+  background-image: 
+    radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+  background-size: 100px 100px;
+  pointer-events: none;
+  animation: sparkle 10s linear infinite;
+  z-index: -1; 
+}
+
+@keyframes sparkle {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 100px 100px, -100px -100px, 50px 50px; }
+}
+
+/*  Pokéballs Flotantes */
+.pokeball {
+  position: absolute;
+  bottom: -10vh; /* Empiezan abajo */
+  width: 60px;
+  height: 60px;
+  /* Diseño Pokeball */
+  background: radial-gradient(circle at center, #fff 0%, #fff 45%, #000 46%, #000 54%, #ff1c1c 55%, #ff1c1c 100%);
+  border-radius: 50%;
+  border: 4px solid #000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  animation: float 10s ease-in-out infinite alternate; /* Animación de flotación más suave */
+  opacity: 0.7;
+}
+
+/* Posiciones y retrasos (usando diferentes tamaños para mayor profundidad visual) */
+.pokeball:nth-child(2) { left: 15%; animation-delay: 2s; width: 50px; height: 50px; opacity: 0.6; }
+.pokeball:nth-child(3) { left: 45%; animation-delay: 4s; width: 70px; height: 70px; }
+.pokeball:nth-child(4) { left: 80%; animation-delay: 6s; width: 55px; height: 55px; }
+.pokeball:nth-child(5) { left: 5%; animation-delay: 1s; width: 40px; height: 40px; opacity: 0.5; }
+
+/* Animación de Flotación */
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(20deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* 🧭 Contenedor Principal */
+.container {
+  text-align: center;
+  padding: 60px 20px;
+  z-index: 10;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*  Título Pokémon */
+h1 {
+  font-family: 'Pokemon Solid', sans-serif;
+  color: #ffcc00; /* Amarillo Pokémon */
+  text-shadow: 
+    3px 3px 0 #003a70, /* Borde azul oscuro */
+    6px 6px 0 #000,
+    9px 9px 10px rgba(0, 0, 0, 0.5); /* Sombra para levantarlo */
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 50px;
+  letter-spacing: 2px;
+}
+
+/* Caja de búsqueda */
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.search-box input {
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: 3px solid #003a70; /* Borde más oscuro y sólido */
+  width: 300px;
+  font-size: 14px;
+  font-family: 'Press Start 2P';
+  background: #fff;
+  color: #222;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  box-shadow: 0 0 20px #ffcc00;
+  border-color: #ffcc00;
+}
+
+.search-box button {
+  background: linear-gradient(45deg, #ff1c1c, #ffcc00);
+  color: #fff;
+  font-family: 'Press Start 2P';
+  border: none;
+  padding: 14px 20px;
+  border-radius: 40px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.search-box button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px #ffcc00;
+}
+
+/* Tarjeta Pokémon - Más épica */
+.pokemon-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  /* Degradado que simula la energía */
+  background: linear-gradient(145deg, #ff4646, #c40000); 
+  border: 5px solid #fff; 
+  border-radius: 25px; 
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); 
+  animation: fadeIn 1s ease-out;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden; /* Importante para el brillo */
+}
+.pokemon-card:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+/* Efecto Brillo Holográfico */
+.pokemon-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  /* Patrón de brillo */
+  background: linear-gradient(60deg, rgba(255,255,255,0.1), rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1));
+  animation: shine 2.5s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.pokemon-card:hover::before {
+    opacity: 1; /* El brillo solo aparece al pasar el ratón */
+}
+
+@keyframes shine {
+  0% { transform: translateX(-150%) skewX(-30deg); }
+  100% { transform: translateX(250%) skewX(-30deg); }
+}
+
+.card-header h2 {
+  font-size: 1.1rem;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+  margin: 15px 0 5px; /* Ajuste de margen */
+  padding: 0 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.pokemon-image img {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #fff, #ddd);
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin-bottom: 15px;
+  transition: transform 0.4s;
+  /* Sombra sutil a la imagen */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+}
+.pokemon-image img:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Info Pokémon */
+.pokemon-info {
+  text-align: left;
+  font-size: 12px;
+  color: #fff;
+}
+.pokemon-info h3 {
+  color: #ffcc00;
+  font-size: 11px;
+  margin: 15px 0 5px; /* Margen para separar las secciones */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 3px;
+}
+
+/* Chips de habilidades/tipos */
+.chip {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 10px;
+  border-radius: 15px; /* Más redondeado */
+  margin: 4px 3px;
+  text-transform: capitalize;
+  font-size: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.chip:hover {
+  background: #ffcc00;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+/* Colores por tipo (Mejorado para mayor contraste) */
+.type-electric { background: #ffdb4d; color: #000; font-weight: bold; }
+.type-fire { background: #ff6b6b; color: #fff; }
+.type-water { background: #4da6ff; color: #fff; }
+.type-grass { background: #55d66b; color: #000; font-weight: bold; }
+.type-psychic { background: #ff80df; color: #fff; }
+.type-ice { background: #aafaff; color: #000; font-weight: bold; }
+.type-fighting { background: #ff8c42; color: #fff; }
+.type-ghost { background: #a78bfa; color: #fff; }
+.type-dragon { background: #7038f8; color: #fff; }
+.type-normal { background: #b0b0b0; color: #000; }
+.type-poison { background: #a040a0; color: #fff; }
+.type-ground { background: #e0c068; color: #000; }
+.type-rock { background: #b8a038; color: #fff; }
+.type-bug { background: #a8b820; color: #fff; }
+.type-steel { background: #b8b8d0; color: #000; }
+.type-fairy { background: #ffb8b8; color: #000; }
+
+/* Estilo de Error */
+.error {
+    margin-top: 20px;
+    color: #ffcc00;
+    text-shadow: 1px 1px 0 #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*  Animaciones */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/*  Footer */
+footer {
+  margin-top: 40px;
+  padding-bottom: 20px;
+  font-size: 10px;
+  color: #eee;
+  text-shadow: 1px 1px 2px #000;
+  z-index: 10;
+  position: relative;
+}
