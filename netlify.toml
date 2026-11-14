@@ -1,0 +1,12 @@
+[build]
+  command = "sh scripts/netlify-build.sh"
+  publish = "dist/demo"
+
+[build.environment]
+  # Angular 11 (webpack 4) is not compatible with modern Node versions
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
